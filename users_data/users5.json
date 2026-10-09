@@ -1,0 +1,65 @@
+{
+  "caseInformation": {
+    "customerID": "0010054321",
+    "requestTime": "2026-06-09T10:15:22.000+0000",
+    "version": "1.0.1",
+    "involvedPartyType": "INDIV"
+  },
+  "individual": {
+    "dataSource": "CSI_BE",
+    "lastUpdateDate": "2026-05-15T00:00:00.000+0000",
+    "effectiveDate": "2010-03-12T00:00:00.000+0000",
+    "countryOfResidence": "BE",
+    "preferredLanguage": "nl",
+    "cityOfBirth": "Antwerp",
+    "dateOfBirth": "1985-04-17",
+    "gender": "ML",
+    "maritalStatus": "MR",
+    "postalAddresses": [
+      {
+        "usageType": "RSDNT_ADR",
+        "countryCode": "BE",
+        "cityName": "2000 ANTWERP",
+        "streetName": "MEIR 120"
+      }
+    ],
+    "digitalAddresses": [
+      {
+        "fullDigitalAddress": "0478123456",
+        "usageType": "MOBILE",
+        "type": "TEL_ADR"
+      }
+    ],
+    "individualNames": [
+      {
+        "type": "FORML_NM",
+        "lastName": "VANDENBERG",
+        "firstName1": "THOMAS"
+      }
+    ]
+  },
+  "taxResidencies": [
+    {
+      "countryOfTaxResidence": "BE"
+    }
+  ],
+  "assessments": [
+    {
+      "type": "CDD",
+      "resultType": "L",
+      "approvalDate": "2025-12-15"
+    }
+  ],
+  "productAgreements": [
+    {
+      "productType": "BE_COW_ORDN_AC",
+      "currency": "EUR",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "364500987123"
+        }
+      ]
+    }
+  ]
+}

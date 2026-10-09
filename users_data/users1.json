@@ -1,0 +1,619 @@
+{
+  "caseInformation": {
+    "customerID": "0010022021",
+    "requestTime": "2020-11-16T16:45:39.682+0000",
+    "version": "1.0.1",
+    "involvedPartyType": "INDIV"
+  },
+  "individual": {
+    "dataSource": "CSI_BE",
+    "lastUpdateDate": "2020-11-09T00:00:00.000+0000",
+    "effectiveDate": "2006-09-28T00:00:00.000+0000",
+    "countryOfResidence": "BE",
+    "preferredLanguage": "fr",
+    "logicalDataDomain": "COW_BE",
+    "cityOfBirth": "SomethCOW",
+    "dateOfBirth": "1982-08-20",
+    "gender": "ML",
+    "lifeCycleStatusType": "LIVCOW_IDV",
+    "maritalStatus": "MR",
+    "legalCompetencyStatusType": "LGL_CMP_ADLT",
+    "dateOfBirthQualityIndicator": "COMPL",
+    "postalAddresses": [
+      {
+        "usageType": "RSDNT_ADR",
+        "countryCode": "BE",
+        "cityName": "2490 BALEN",
+        "streetName": "COMMANDANT GIDDELOSTR 6",
+        "dataSource": "CSI_BE"
+      }
+    ],
+    "digitalAddresses": [
+      {
+        "fullDigitalAddress": "0496574710",
+        "usageType": "LANDLINE_TEL_NBR",
+        "type": "TEL_ADR",
+        "dataSource": "CSI_BE",
+        "phoneCountryCode": "BE"
+      }
+    ],
+    "internalIdentifiers": [
+      {
+        "type": "CSI_BE",
+        "value": "0007440888",
+        "dataSource": "CSI_BE"
+      },
+      {
+        "type": "COW_ID_BE",
+        "value": "000101954070",
+        "dataSource": "CSI_BE"
+      },
+      {
+        "type": "GRID",
+        "value": "000052536696",
+        "dataSource": "CSI_BE"
+      }
+    ],
+    "externalIdentifiers": [
+      {
+        "countryOfIssue": "BE",
+        "dateOfIssue": "2007-09-20",
+        "expiryDate": "2012-09-20",
+        "type": "ID_CARD_FRGN_BE",
+        "value": " 999252450957",
+        "placeOfIssue": "BALEN",
+        "dataSource": "CSI_BE"
+      },
+      {
+        "countryOfIssue": "BE",
+        "type": "TIN",
+        "value": "82082420577",
+        "dataSource": "CSI_BE"
+      }
+    ],
+    "individualNames": [
+      {
+        "type": "FORML_NM",
+        "lastName": "FRANCESCHINI",
+        "firstName1": "JORT",
+        "dataSource": "CSI_BE"
+      },
+      {
+        "type": "INFML_NM",
+        "lastName": "Ciao",
+        "firstName1": "Bella",
+        "dataSource": "CSI_BE"
+      }
+    ]
+  },
+  "jointAccountDetails": [
+    {
+      "accountNumber": "000045133995",
+      "coAccountHolders": [
+        {
+          "name": "SUMEYYA TORRES FONTES ALVES",
+          "localId": "0099366305",
+          "cddRiskLevel": "LO"
+        }
+      ]
+    },
+    {
+      "accountNumber": "000027703095",
+      "coAccountHolders": [
+        {
+          "name": "SUMEYYA TORRES FONTES ALVES",
+          "localId": "0099366305",
+          "cddRiskLevel": "LO"
+        }
+      ]
+    }
+  ],
+  "citizenships": [
+    {
+      "citizenship": "BE"
+    }
+  ],
+  "taxResidencies": [
+    {
+      "countryOfTaxResidence": "BE"
+    },
+    {
+      "countryOfTaxResidence": "US"
+    },
+    {
+      "countryOfTaxResidence": "DM"
+    }
+  ],
+  "groups": [
+    {
+      "type": "SVC_SEGM_BE",
+      "code": "756"
+    }
+  ],
+  "managCOWEntities": [
+    {
+      "type": "RLTNP_MGR_PRTFL_BE",
+      "code": "05473",
+      "effectiveDate": "1991-01-14"
+    },
+    {
+      "type": "BR_OFFC_BE",
+      "code": "310073",
+      "effectiveDate": "1991-01-14"
+    }
+  ],
+  "assessments": [
+    {
+      "type": "FATCA",
+      "resultType": "INDSUS",
+      "processType": "ST",
+      "approvalDate": "2015-09-01",
+      "dataSource": "CSI_BE"
+    },
+    {
+      "type": "CRS",
+      "resultType": "INDPRV",
+      "processType": "ST",
+      "approvalDate": "2014-11-22",
+      "dataSource": "CSI_BE"
+    },
+    {
+      "type": "ID_VERF",
+      "processType": "F2F_COW",
+      "dataSource": "CSI_BE"
+    },
+    {
+      "type": "CDD",
+      "resultType": "I",
+      "processType": "GKYC_CDD_PCS_TP",
+      "approvalDate": "2015-11-26",
+      "dataSource": "CSI_BE"
+    }
+  ],
+  "occupations": [
+    {
+      "classificationIssuerType": "OCP_CL_BE",
+      "classificationCode": "705",
+      "rank": "1",
+      "industryClassificationIssuerType": "IDY_CL_NACE_BE",
+      "industryClassificationCode": "7000"
+    }
+  ],
+  "productAgreements": [
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_MISC_CRN_AC",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "631142712296"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_GREEN_AC",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310065613415"
+        }
+      ],
+      "involvedPartyRelationships": [
+        {
+          "involvedParty": {
+            "id": "0746961564"
+          },
+          "effectiveDate": "1994-09-09T00:00:00.000+0000"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_LION_AC",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "377091116682"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_CRN_AC_MULTI_CCY",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310065613415"
+        }
+      ],
+      "involvedPartyRelationships": [
+        {
+          "involvedParty": {
+            "id": "0746961564"
+          },
+          "effectiveDate": "1994-09-09T00:00:00.000+0000"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_GREEN_SVG_AC",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310454365062"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_CASH_FCY",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310065613415"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_CARD_CR",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "631142712296"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_PH_BANK",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "000101954070"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_HM_BANK",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "000101954070"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_SO",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310065613415"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_DBT_SEPA_DD_CORE",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310065613415"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_DB_CARD",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "303149744902"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_DB_CARD",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "303248465640"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_DB_CARD",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "310065613415"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_MSTR_CARD",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "520697549754"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_INCM_P_INS",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "XXX",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "510024047165"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_ORDN_AC",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "EUR",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "363094201790"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_CRN_AC_MULTI_CCY",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "EUR",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "363094201790"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_COW_ORDN_AC",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "EUR",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "363094201790"
+        }
+      ]
+    },
+    {
+      "dataSource": "CSI_BE",
+      "productType": "BE_CRN_AC_MULTI_CCY",
+      "lifeCycleStatusType": "EFF_AR",
+      "COWEntity": "COW_BE",
+      "currency": "EUR",
+      "identifiers": [
+        {
+          "type": "BE_CONTR",
+          "value": "363094201790"
+        }
+      ]
+    }
+  ],
+  "involvedPartyInvolvedPartyRelationship": [
+    {
+      "type": "ENDORSEMNT",
+      "mixableIndicatorType": "Y",
+      "logicalDataDomain": "COW_BE",
+      "operationalLifecycleStatusType": "EFF",
+      "dataSource": "CSI_BE",
+      "grantors": [
+        {
+          "type": "ENDORSER",
+          "id": "0010022021"
+        }
+      ]
+    }
+  ],
+  "countrySpecificCaseSection": {
+    "reviewData": [
+      {
+        "involvedPartyIdentifier": {
+          "type": "CSI_BE",
+          "value": "0010022021"
+        },
+        "customerDueDeligenceInformation": {
+          "periodicOrder": {
+            "countriesOfDestination": [
+              "NL"
+            ]
+          },
+          "involvedPartyInvolvedPartyRelationship": {
+            "purposeTypes": [
+              "NSP",
+              "PBA"
+            ]
+          },
+          "organisation": {
+            "industryClassification": "Charity organisation and activities"
+          },
+          "involvedParty": {
+            "countriesOfOperation": [
+              "FR",
+              "BE"
+            ]
+          },
+          "inflowAmount": {
+            "value": 1000,
+            "currency": "EUR",
+            "measurementPeriodType": "Annual",
+            "scenario": "Actual"
+          },
+          "customerDueDiligenceQuestionnaire": [
+            {
+              "identifier": "isInvolvedPartyGrantor",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "involvedPartyUsCOWIntermediary",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "linkBetweenGuarantorAndCustomer",
+              "answer": {
+                "value": "Y"
+              }
+            },
+            {
+              "identifier": "HoldMail",
+              "answer": {
+                "value": "Y"
+              }
+            },
+            {
+              "identifier": "involvedPartyDeclaresToBeUSperson",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "AABGreaterThanLimitForHVI",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "involvedPartyActCOWOnOwnBehalf",
+              "answer": {
+                "value": "Y"
+              }
+            },
+            {
+              "identifier": "realEstateForOwnUse",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "verificationOfIdentityDelayedfortheClientandAPs",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "JointAccountIndicator",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "Business purpose Pvt account",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "OccupationList",
+              "answer": {
+                "value": "EMPL¶OTHERS¶¶"
+              }
+            },
+            {
+              "identifier": "Business Use PVT account",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "isCustomerHighNetWorthIndividual",
+              "answer": {
+                "value": "N"
+              }
+            }
+          ],
+          "officeDueDiligenceQuestionnaire": [
+            {
+              "identifier": "BE1",
+              "answer": {
+                "value": "N"
+              }
+            },
+            {
+              "identifier": "BE2",
+              "answer": {
+                "value": "Private individual - Private bankCOW"
+              }
+            },
+            {
+              "identifier": "BE3",
+              "answer": {
+                "value": "Antwerp Retail And Pb"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

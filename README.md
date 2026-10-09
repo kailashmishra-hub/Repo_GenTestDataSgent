@@ -53,6 +53,22 @@ The main generated input file is:
 
 `users-index.csv` contains flattened JSON paths such as `individual.postalAddresses[0].countryCode`, so nested JSON fields are also available for searching.
 
+## Write A Finder Report
+
+To write a result report to `runtime/data-finder--report.txt`:
+
+```powershell
+python test_data_agent\write_data_finder_report.py --text "Your result text here"
+```
+
+Or pipe content:
+
+```powershell
+"Your result text here" | python test_data_agent\write_data_finder_report.py
+```
+
+The script creates `runtime` if needed and verifies the report exists before completing.
+
 ## GHCP Usage
 
 In GitHub Copilot Chat, ask questions such as:

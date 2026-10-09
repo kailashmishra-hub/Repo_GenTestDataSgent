@@ -4,7 +4,10 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-USERS_DIR = PROJECT_ROOT / "users_data"
+SOURCE_DIRS = [
+    PROJECT_ROOT / "users_data",
+    PROJECT_ROOT / "generated_data",
+]
 OUTPUT_DIR = PROJECT_ROOT / ".test-data-index"
 INDEX_CSV = OUTPUT_DIR / "users-index.csv"
 
@@ -26,16 +29,24 @@ def flatten_json(item, prefix=""):
     return flattened
 
 
+def source_label(json_file, index=None):
+    label = json_file.relative_to(PROJECT_ROOT).as_posix()
+    return f"{label}#{index}" if index is not None else label
+
+
 def load_users():
     records = []
-    for json_file in sorted(USERS_DIR.glob("*.json")):
-        with json_file.open(encoding="utf-8") as handle:
-            data = json.load(handle)
-        if isinstance(data, list):
-            for index, item in enumerate(data, start=1):
-                records.append({"sourceFile": f"{json_file.name}#{index}", **flatten_json(item)})
-        else:
-            records.append({"sourceFile": json_file.name, **flatten_json(data)})
+    for source_dir in SOURCE_DIRS:
+        if not source_dir.exists():
+            continue
+        for json_file in sorted(source_dir.glob("*.json")):
+            with json_file.open(encoding="utf-8") as handle:
+                data = json.load(handle)
+            if isinstance(data, list):
+                for index, item in enumerate(data, start=1):
+                    records.append({"sourceFile": source_label(json_file, index), **flatten_json(item)})
+            else:
+                records.append({"sourceFile": source_label(json_file), **flatten_json(data)})
     return records
 
 

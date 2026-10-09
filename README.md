@@ -1,6 +1,9 @@
 # Generative Test Data Agent
 
-This repository contains a GHCP-friendly test data agent that indexes JSON test data into a CSV and searches that CSV for matching records.
+This repository contains GHCP-friendly test data workflows:
+
+- Find existing test data by indexing JSON into a CSV.
+- Create similar test data by cloning an existing JSON structure and applying requested field changes.
 
 The current sample data lives in:
 
@@ -17,7 +20,7 @@ agents/generative-test-data-agent.md
 
 ## What It Does
 
-The agent helps answer questions like:
+The finder flow helps answer questions like:
 
 ```text
 Find me a Belgian customer with French language and FATCA INDSUS assessment.
@@ -26,6 +29,13 @@ Find customer data with CDD result L and current account product.
 ```
 
 Every time you call the agent, it rebuilds `.test-data-index/users-index.csv` from `users_data/*.json`, then uses that CSV as the input for the find job.
+
+The creator flow helps with requests like:
+
+```text
+Create similar data from users2.json but make country of tax residence LU.
+Create a new BE customer based on the closest CDD L customer but change preferred language to fr.
+```
 
 ## Generate The CSV Mapping
 
@@ -61,9 +71,22 @@ and use:
 
 ```text
 agents/generative-test-data-agent.md
+agents/generative-test-data-creator-agent.md
 ```
 
-GHCP should run the index builder, read `.test-data-index/users-index.csv`, and return the matching `sourceFile`, `caseInformation.customerID`, and matching fields.
+GHCP should run the index builder, read `.test-data-index/users-index.csv`, and return the matching `sourceFile`, `caseInformation.customerID`, and matching fields. `sourceFile` is a repository-relative path such as `users_data/users2.json`.
+
+For creating new test data, GHCP should use:
+
+```powershell
+python test_data_agent\create_test_data_from_template.py --template users_data\<sourceFile> --output generated_data\<newFile>.json --set <json.path>=<value>
+```
+
+Example:
+
+```powershell
+python test_data_agent\create_test_data_from_template.py --template users_data\users2.json --output generated_data\users2_tax_lu.json --set taxResidencies[0].countryOfTaxResidence=LU
+```
 
 Useful columns:
 

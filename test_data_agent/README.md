@@ -20,19 +20,33 @@ and generates:
 
 `users-index.csv` is the compact business-field index. `users-full-flat.csv` captures every JSON path found in the source files, including nested arrays.
 
-## Build the Index
+## Run the Agent
+
+Call the agent directly with the information you need:
+
+```powershell
+python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS"
+```
+
+The agent refreshes the index automatically when needed, extracts requirements, searches the indexed JSON data, and returns the recommended source file.
+
+Show selected JSON:
+
+```powershell
+python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS" --show-json
+```
+
+## Manual Index Build
+
+Usually not needed, but available:
 
 ```powershell
 python test_data_agent\build_test_data_index.py
 ```
 
-## Find Test Data
+## Find Test Data Directly
 
-Agentic selector:
-
-```powershell
-python test_data_agent\agent.py --refresh-index --request "BE customer with French language and FATCA INDSUS"
-```
+This is optional. Prefer `agent.py` for normal usage.
 
 Natural-language search:
 

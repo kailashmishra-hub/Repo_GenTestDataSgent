@@ -27,15 +27,29 @@ Find customer data with CDD result L and current account product.
 
 It first searches existing JSON files. If no exact match is available, it shows the closest records and explains which fields are missing or different.
 
-## Build the Search Index
+## Run The Agent
 
 From the repository root:
 
 ```powershell
-python test_data_agent\build_test_data_index.py
+python test_data_agent\agent.py "Belgian French customer with FATCA INDSUS"
 ```
 
-This generates:
+The agent automatically refreshes the index when it is missing or stale, extracts likely requirements from your request, finds the best existing JSON, and prints the fetched test-data information.
+
+Example with full JSON output:
+
+```powershell
+python test_data_agent\agent.py "Belgian French customer with FATCA INDSUS" --show-json
+```
+
+You can still pass exact requirements when needed:
+
+```powershell
+python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
+```
+
+The indexer generates:
 
 ```text
 .test-data-index/users-index.json
@@ -49,20 +63,6 @@ Generated index files are ignored by Git.
 
 `users-index.csv` is a summary for common fields. `users-full-flat.csv` contains every captured JSON field using paths such as `individual.postalAddresses[0].countryCode`.
 
-## Run The Agent
-
-Use the agentic selector when you want a decision, recommendation, and next action:
-
-```powershell
-python test_data_agent\agent.py --refresh-index --request "Belgian French customer with FATCA INDSUS"
-```
-
-With precise filters:
-
-```powershell
-python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
-```
-
 The agent returns one of:
 
 ```text
@@ -73,6 +73,8 @@ NO_MATCH
 ```
 
 ## Search Test Data Directly
+
+This is optional. Prefer `agent.py` for normal usage.
 
 Natural-language style search:
 

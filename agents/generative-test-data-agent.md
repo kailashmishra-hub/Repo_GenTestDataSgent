@@ -65,10 +65,10 @@ Build the test-data index:
 python test_data_agent\build_test_data_index.py
 ```
 
-Find matching test data:
+Call the agent to find matching test data:
 
 ```powershell
-python test_data_agent\agent.py --refresh-index --request "BE customer with French language and FATCA INDSUS"
+python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS"
 ```
 
 Structured filter search:
@@ -76,6 +76,8 @@ Structured filter search:
 ```powershell
 python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
 ```
+
+Use `--show-json` when the user wants the full selected JSON content.
 
 ## Neo4j Option
 

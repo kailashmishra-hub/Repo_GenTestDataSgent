@@ -24,23 +24,19 @@ Generated index:
 
 Use this flow:
 
-1. Build or refresh the index when JSON files change:
+1. Use the agentic selector first. It refreshes the index automatically when needed:
 
 ```powershell
-python test_data_agent\build_test_data_index.py
+python test_data_agent\agent.py "<user request>"
 ```
 
-2. Use the agentic selector first:
-
-```powershell
-python test_data_agent\agent.py --request "<user request>"
-```
-
-3. For precise matching, prefer structured filters:
+2. For precise matching, use structured filters:
 
 ```powershell
 python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr
 ```
+
+3. If the user asks for the full JSON, add `--show-json`.
 
 4. If no exact data exists, identify the closest JSON file and list the fields that need to be changed.
 

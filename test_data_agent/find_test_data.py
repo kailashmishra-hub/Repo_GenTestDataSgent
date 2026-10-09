@@ -6,6 +6,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 INDEX_JSON = PROJECT_ROOT / ".test-data-index" / "users-index.json"
+FULL_INDEX_JSON = PROJECT_ROOT / ".test-data-index" / "users-full-flat.json"
 BUILD_SCRIPT = PROJECT_ROOT / "test_data_agent" / "build_test_data_index.py"
 
 
@@ -61,7 +62,16 @@ def load_index():
         raise SystemExit(
             f"Missing {INDEX_JSON}\nRun first: python {BUILD_SCRIPT.relative_to(PROJECT_ROOT)}"
         )
-    return json.loads(INDEX_JSON.read_text(encoding="utf-8"))
+
+    records = json.loads(INDEX_JSON.read_text(encoding="utf-8"))
+    flat_by_source = {}
+    if FULL_INDEX_JSON.exists():
+        flat_records = json.loads(FULL_INDEX_JSON.read_text(encoding="utf-8"))
+        flat_by_source = {record["sourceFile"]: record for record in flat_records}
+
+    for record in records:
+        record["_flat"] = flat_by_source.get(record["sourceFile"], {})
+    return records
 
 
 def parse_filter(filter_text):
@@ -72,26 +82,45 @@ def parse_filter(filter_text):
     return key, expected.strip()
 
 
-def score_record(record, query_terms, filters):
+def record_value(record, key):
+    if key in record and key != "_flat":
+        return str(record.get(key, ""))
+    return str(record.get("_flat", {}).get(key, ""))
+
+
+def score_record(record, terms, filters):
     score = 0
     matched = []
     missing = []
 
     for key, expected in filters:
-        actual = str(record.get(key, ""))
+        actual = record_value(record, key)
         if normalize(actual) == normalize(expected):
             score += 10
             matched.append(f"{key}={actual}")
         else:
             missing.append(f"{key}: expected {expected}, found {actual or '<blank>'}")
 
-    searchable = normalize(" ".join(str(value) for value in record.values()))
-    for term in query_terms:
+    searchable_values = [str(value) for key, value in record.items() if key != "_flat"]
+    searchable_values.extend(str(value) for value in record.get("_flat", {}).values())
+    searchable = normalize(" ".join(searchable_values))
+    for term in terms:
         if term in searchable:
             score += 1
             matched.append(term)
 
     return score, matched, missing
+
+
+def rank_records(records, query="", filters=None):
+    filters = filters or []
+    terms = query_terms(query)
+    ranked = []
+    for record in records:
+        score, matched, missing = score_record(record, terms, filters)
+        ranked.append((score, record, matched, missing))
+    ranked.sort(key=lambda item: item[0], reverse=True)
+    return ranked
 
 
 def print_result(record, score, matched, missing):
@@ -121,14 +150,7 @@ def main():
 
     records = load_index()
     filters = [parse_filter(item) for item in args.filter]
-    terms = query_terms(args.query)
-
-    ranked = []
-    for record in records:
-        score, matched, missing = score_record(record, terms, filters)
-        ranked.append((score, record, matched, missing))
-
-    ranked.sort(key=lambda item: item[0], reverse=True)
+    ranked = rank_records(records, args.query, filters)
     for score, record, matched, missing in ranked[: args.top]:
         print_result(record, score, matched, missing)
 

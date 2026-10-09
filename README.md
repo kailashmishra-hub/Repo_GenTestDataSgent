@@ -40,12 +40,39 @@ This generates:
 ```text
 .test-data-index/users-index.json
 .test-data-index/users-index.csv
+.test-data-index/users-full-flat.json
+.test-data-index/users-full-flat.csv
 .test-data-index/neo4j-users.csv
 ```
 
 Generated index files are ignored by Git.
 
-## Search Test Data
+`users-index.csv` is a summary for common fields. `users-full-flat.csv` contains every captured JSON field using paths such as `individual.postalAddresses[0].countryCode`.
+
+## Run The Agent
+
+Use the agentic selector when you want a decision, recommendation, and next action:
+
+```powershell
+python test_data_agent\agent.py --refresh-index --request "Belgian French customer with FATCA INDSUS"
+```
+
+With precise filters:
+
+```powershell
+python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
+```
+
+The agent returns one of:
+
+```text
+EXACT_MATCH
+BEST_TEXT_MATCH
+PARTIAL_MATCH
+NO_MATCH
+```
+
+## Search Test Data Directly
 
 Natural-language style search:
 

@@ -17,6 +17,8 @@ Generated searchable index:
 ```text
 .test-data-index/users-index.json
 .test-data-index/users-index.csv
+.test-data-index/users-full-flat.json
+.test-data-index/users-full-flat.csv
 ```
 
 ## Operating Rules
@@ -28,6 +30,8 @@ Generated searchable index:
 5. If a new test data record is required, generate it by copying the closest valid shape and changing only the requested fields.
 6. Do not hardcode API keys, secrets, tokens, or customer credentials.
 7. Do not modify original files in `users_data` unless the user explicitly asks to create or update a test-data file.
+8. Use `agent.py` for agentic selection because it returns a decision, recommendation, and next action.
+9. Use `users-full-flat.csv` when a requested field is not present in the compact summary CSV.
 
 ## Current Searchable Fields
 
@@ -64,13 +68,13 @@ python test_data_agent\build_test_data_index.py
 Find matching test data:
 
 ```powershell
-python test_data_agent\find_test_data.py --query "BE customer with French language and FATCA INDSUS"
+python test_data_agent\agent.py --refresh-index --request "BE customer with French language and FATCA INDSUS"
 ```
 
 Structured filter search:
 
 ```powershell
-python test_data_agent\find_test_data.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
+python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
 ```
 
 ## Neo4j Option

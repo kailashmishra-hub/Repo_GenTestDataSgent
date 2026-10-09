@@ -13,8 +13,12 @@ and generates:
 ```text
 .test-data-index/users-index.json
 .test-data-index/users-index.csv
+.test-data-index/users-full-flat.json
+.test-data-index/users-full-flat.csv
 .test-data-index/neo4j-users.csv
 ```
+
+`users-index.csv` is the compact business-field index. `users-full-flat.csv` captures every JSON path found in the source files, including nested arrays.
 
 ## Build the Index
 
@@ -23,6 +27,12 @@ python test_data_agent\build_test_data_index.py
 ```
 
 ## Find Test Data
+
+Agentic selector:
+
+```powershell
+python test_data_agent\agent.py --refresh-index --request "BE customer with French language and FATCA INDSUS"
+```
 
 Natural-language search:
 
@@ -48,6 +58,12 @@ assessmentType
 assessmentResult
 productType
 productCurrency
+```
+
+You can also filter by full flattened JSON paths, for example:
+
+```powershell
+python test_data_agent\agent.py --filter individual.postalAddresses[0].countryCode=LU
 ```
 
 ## Neo4j

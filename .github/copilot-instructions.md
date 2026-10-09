@@ -19,6 +19,7 @@ Generated index:
 ```text
 .test-data-index/users-index.json
 .test-data-index/users-index.csv
+.test-data-index/users-full-flat.csv
 ```
 
 Use this flow:
@@ -29,16 +30,16 @@ Use this flow:
 python test_data_agent\build_test_data_index.py
 ```
 
-2. Search existing test data first:
+2. Use the agentic selector first:
 
 ```powershell
-python test_data_agent\find_test_data.py --query "<user request>"
+python test_data_agent\agent.py --request "<user request>"
 ```
 
 3. For precise matching, prefer structured filters:
 
 ```powershell
-python test_data_agent\find_test_data.py --filter countryOfResidence=BE --filter preferredLanguage=fr
+python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr
 ```
 
 4. If no exact data exists, identify the closest JSON file and list the fields that need to be changed.

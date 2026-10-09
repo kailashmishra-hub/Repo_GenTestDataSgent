@@ -8,6 +8,8 @@ USERS_DIR = PROJECT_ROOT / "users_data"
 OUTPUT_DIR = PROJECT_ROOT / ".test-data-index"
 INDEX_JSON = OUTPUT_DIR / "users-index.json"
 INDEX_CSV = OUTPUT_DIR / "users-index.csv"
+FULL_INDEX_JSON = OUTPUT_DIR / "users-full-flat.json"
+FULL_INDEX_CSV = OUTPUT_DIR / "users-full-flat.csv"
 NEO4J_CSV = OUTPUT_DIR / "neo4j-users.csv"
 
 
@@ -77,35 +79,67 @@ def build_record(source_file, data):
     }
 
 
+def flatten_json(item, prefix=""):
+    flattened = {}
+    if isinstance(item, dict):
+        for key, value_to_flatten in item.items():
+            child_key = f"{prefix}.{key}" if prefix else key
+            flattened.update(flatten_json(value_to_flatten, child_key))
+    elif isinstance(item, list):
+        if not item:
+            flattened[prefix] = ""
+        for index, value_to_flatten in enumerate(item):
+            child_key = f"{prefix}[{index}]"
+            flattened.update(flatten_json(value_to_flatten, child_key))
+    else:
+        flattened[prefix] = "" if item is None else str(item)
+    return flattened
+
+
 def load_users():
     records = []
+    flat_records = []
     for json_file in sorted(USERS_DIR.glob("*.json")):
         with json_file.open(encoding="utf-8") as handle:
             data = json.load(handle)
         if isinstance(data, list):
             for index, item in enumerate(data, start=1):
-                records.append(build_record(f"{json_file.name}#{index}", item))
+                source_file = f"{json_file.name}#{index}"
+                records.append(build_record(source_file, item))
+                flat_records.append({"sourceFile": source_file, **flatten_json(item)})
         else:
             records.append(build_record(json_file.name, data))
-    return records
+            flat_records.append({"sourceFile": json_file.name, **flatten_json(data)})
+    return records, flat_records
 
 
-def write_csv(path, records):
+def write_csv(path, records, fieldnames):
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=FIELDNAMES)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(records)
 
 
+def full_fieldnames(records):
+    fields = {"sourceFile"}
+    for record in records:
+        fields.update(record.keys())
+    return ["sourceFile"] + sorted(field for field in fields if field != "sourceFile")
+
+
 def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
-    records = load_users()
+    records, flat_records = load_users()
     INDEX_JSON.write_text(json.dumps(records, indent=2), encoding="utf-8")
-    write_csv(INDEX_CSV, records)
-    write_csv(NEO4J_CSV, records)
+    FULL_INDEX_JSON.write_text(json.dumps(flat_records, indent=2), encoding="utf-8")
+    write_csv(INDEX_CSV, records, FIELDNAMES)
+    write_csv(FULL_INDEX_CSV, flat_records, full_fieldnames(flat_records))
+    write_csv(NEO4J_CSV, records, FIELDNAMES)
     print(f"Indexed {len(records)} user records")
     print(f"Wrote {INDEX_JSON}")
     print(f"Wrote {INDEX_CSV}")
+    print(f"Wrote {FULL_INDEX_JSON}")
+    print(f"Wrote {FULL_INDEX_CSV}")
     print(f"Wrote {NEO4J_CSV}")
 
 

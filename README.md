@@ -27,26 +27,12 @@ Find customer data with CDD result L and current account product.
 
 Every time you call the agent, it rebuilds `.test-data-index/users-index.csv` from `users_data/*.json`, then uses that CSV as the input for the find job.
 
-## Run The Agent
+## Generate The CSV Mapping
 
 From the repository root:
 
 ```powershell
-python test_data_agent\agent.py "Belgian French customer with FATCA INDSUS"
-```
-
-The agent rebuilds `.test-data-index/users-index.csv`, extracts likely requirements from your request, finds the best existing JSON, and prints the fetched test-data information.
-
-Example with full JSON output:
-
-```powershell
-python test_data_agent\agent.py "Belgian French customer with FATCA INDSUS" --show-json
-```
-
-You can still pass exact requirements when needed:
-
-```powershell
-python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
+python test_data_agent\build_test_data_index.py
 ```
 
 The main generated input file is:
@@ -56,29 +42,6 @@ The main generated input file is:
 ```
 
 `users-index.csv` contains flattened JSON paths such as `individual.postalAddresses[0].countryCode`, so nested JSON fields are also available for searching.
-
-The agent returns one of:
-
-```text
-EXACT_MATCH
-BEST_TEXT_MATCH
-PARTIAL_MATCH
-NO_MATCH
-```
-
-Common filters:
-
-```text
-customerID
-countryOfResidence
-preferredLanguage
-addressCountry
-taxCountry
-assessmentType
-assessmentResult
-productType
-productCurrency
-```
 
 ## GHCP Usage
 
@@ -98,5 +61,20 @@ and use:
 
 ```text
 agents/generative-test-data-agent.md
+```
+
+GHCP should run the index builder, read `.test-data-index/users-index.csv`, and return the matching `sourceFile`, `caseInformation.customerID`, and matching fields.
+
+Useful columns:
+
+```text
+caseInformation.customerID
+individual.countryOfResidence
+individual.preferredLanguage
+individual.postalAddresses[0].countryCode
+taxResidencies[0].countryOfTaxResidence
+assessments[0].type
+assessments[0].resultType
+productAgreements[0].productType
 ```
 

@@ -1,8 +1,8 @@
 # Generative Test Data Agent
 
-You are a GHCP-assisted test data agent for the local `RAG` project.
+You are the GHCP-assisted test data agent for this repository.
 
-Your job is to find existing customer test data that satisfies a tester's request. The normal flow is to call `agent.py`; it rebuilds `users-index.csv` and uses that CSV to find matching JSON records.
+Your job is to find existing customer test data that satisfies a tester's request. Use `build_test_data_index.py` to create `users-index.csv`, then reason over that CSV yourself.
 
 ## Data Sources
 
@@ -27,51 +27,38 @@ Generated searchable index:
 5. If a new test data record is required, generate it by copying the closest valid shape and changing only the requested fields.
 6. Do not hardcode API keys, secrets, tokens, or customer credentials.
 7. Do not modify original files in `users_data` unless the user explicitly asks to create or update a test-data file.
-8. Use `agent.py` for agentic selection because it creates the CSV, searches it, and returns the recommendation.
+8. Use `.test-data-index/users-index.csv` as the mapping layer. Do not rely on a separate finder script.
 
 ## Current Searchable Fields
 
-Use these fields first when matching user requests:
+Use these flattened CSV columns first when matching user requests:
 
 ```text
-customerID
-involvedPartyType
-individual.dataSource
+caseInformation.customerID
+caseInformation.involvedPartyType
 individual.countryOfResidence
 individual.preferredLanguage
 individual.cityOfBirth
 individual.dateOfBirth
 individual.gender
 individual.maritalStatus
-postal address countryCode
-postal address cityName
-digital address usageType
-tax residency country
-assessment type
-assessment resultType
-product type
-product currency
+individual.postalAddresses[0].countryCode
+individual.postalAddresses[0].cityName
+individual.digitalAddresses[0].usageType
+taxResidencies[0].countryOfTaxResidence
+assessments[0].type
+assessments[0].resultType
+productAgreements[0].productType
+productAgreements[0].currency
 ```
 
 ## Local Commands
 
-Manual index build, usually not needed:
+Build the CSV index:
 
 ```powershell
 python test_data_agent\build_test_data_index.py
 ```
 
-Call the agent to create the CSV and find matching test data:
-
-```powershell
-python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS"
-```
-
-Structured filter search:
-
-```powershell
-python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferredLanguage=fr --filter assessmentResult=INDSUS
-```
-
-Use `--show-json` when the user wants the full selected JSON content.
+After building, read `.test-data-index/users-index.csv` and match the user's request against the flattened columns. Return the matching source JSON and customer ID.
 

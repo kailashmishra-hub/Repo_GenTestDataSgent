@@ -1,6 +1,6 @@
 # Generative Test Data Agent
 
-This folder contains the local test-data agent for GHCP-assisted testing.
+This folder contains the CSV index builder for GHCP-assisted test-data lookup.
 
 It indexes JSON files from:
 
@@ -16,47 +16,29 @@ and generates the main input CSV:
 
 `users-index.csv` captures flattened JSON paths, including nested arrays.
 
-## Run the Agent
-
-Call the agent directly with the information you need:
-
-```powershell
-python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS"
-```
-
-The agent rebuilds `users-index.csv` every time it runs, extracts requirements, searches the CSV, and returns the recommended source file.
-
-Show selected JSON:
-
-```powershell
-python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS" --show-json
-```
-
-## Manual Index Build
-
-Usually not needed because the agent rebuilds the CSV, but available:
+## Build the CSV Index
 
 ```powershell
 python test_data_agent\build_test_data_index.py
 ```
 
-Useful filters:
+GHCP/Copilot should then read:
 
 ```text
-customerID
-countryOfResidence
-preferredLanguage
-addressCountry
-taxCountry
-assessmentType
-assessmentResult
-productType
-productCurrency
+.test-data-index/users-index.csv
 ```
 
-You can also filter by full flattened JSON paths, for example:
+Useful columns:
 
-```powershell
-python test_data_agent\agent.py --filter individual.postalAddresses[0].countryCode=LU
+```text
+caseInformation.customerID
+individual.countryOfResidence
+individual.preferredLanguage
+individual.postalAddresses[0].countryCode
+taxResidencies[0].countryOfTaxResidence
+assessments[0].type
+assessments[0].resultType
+productAgreements[0].productType
+productAgreements[0].currency
 ```
 

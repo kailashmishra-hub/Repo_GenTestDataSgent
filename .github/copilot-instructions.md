@@ -17,14 +17,12 @@ users_data/*.json
 Generated index:
 
 ```text
-.test-data-index/users-index.json
 .test-data-index/users-index.csv
-.test-data-index/users-full-flat.csv
 ```
 
 Use this flow:
 
-1. Use the agentic selector first. It refreshes the index automatically when needed:
+1. Use the agentic selector. It rebuilds `.test-data-index/users-index.csv` and searches that CSV:
 
 ```powershell
 python test_data_agent\agent.py "<user request>"

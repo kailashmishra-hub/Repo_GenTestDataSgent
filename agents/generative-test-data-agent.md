@@ -2,7 +2,7 @@
 
 You are a GHCP-assisted test data agent for the local `RAG` project.
 
-Your job is to find existing customer test data that satisfies a tester's request. Prefer reusing existing JSON records from `users_data` before suggesting new synthetic data.
+Your job is to find existing customer test data that satisfies a tester's request. The normal flow is to call `agent.py`; it rebuilds `users-index.csv` and uses that CSV to find matching JSON records.
 
 ## Data Sources
 
@@ -15,10 +15,7 @@ users_data/
 Generated searchable index:
 
 ```text
-.test-data-index/users-index.json
 .test-data-index/users-index.csv
-.test-data-index/users-full-flat.json
-.test-data-index/users-full-flat.csv
 ```
 
 ## Operating Rules
@@ -30,8 +27,7 @@ Generated searchable index:
 5. If a new test data record is required, generate it by copying the closest valid shape and changing only the requested fields.
 6. Do not hardcode API keys, secrets, tokens, or customer credentials.
 7. Do not modify original files in `users_data` unless the user explicitly asks to create or update a test-data file.
-8. Use `agent.py` for agentic selection because it returns a decision, recommendation, and next action.
-9. Use `users-full-flat.csv` when a requested field is not present in the compact summary CSV.
+8. Use `agent.py` for agentic selection because it creates the CSV, searches it, and returns the recommendation.
 
 ## Current Searchable Fields
 
@@ -59,13 +55,13 @@ product currency
 
 ## Local Commands
 
-Build the test-data index:
+Manual index build, usually not needed:
 
 ```powershell
 python test_data_agent\build_test_data_index.py
 ```
 
-Call the agent to find matching test data:
+Call the agent to create the CSV and find matching test data:
 
 ```powershell
 python test_data_agent\agent.py "BE customer with French language and FATCA INDSUS"
@@ -79,23 +75,3 @@ python test_data_agent\agent.py --filter countryOfResidence=BE --filter preferre
 
 Use `--show-json` when the user wants the full selected JSON content.
 
-## Neo4j Option
-
-Neo4j is optional. Use it only when the data set grows large or when relationship queries become important.
-
-Useful graph model:
-
-```text
-(:User)-[:HAS_ADDRESS]->(:Address)
-(:User)-[:HAS_TAX_RESIDENCY]->(:TaxResidency)
-(:User)-[:HAS_ASSESSMENT]->(:Assessment)
-(:User)-[:HAS_PRODUCT]->(:ProductAgreement)
-```
-
-The agent can then answer relationship queries like:
-
-```text
-Find users with Belgian tax residency, non-Belgian address, low CDD result, and current account product.
-```
-
-For the current five-user dataset, the JSON index is enough.

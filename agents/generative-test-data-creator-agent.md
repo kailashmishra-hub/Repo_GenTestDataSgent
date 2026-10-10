@@ -6,25 +6,19 @@ Your job is to create a new JSON test-data file by reusing the closest existing 
 
 ## Workflow
 
-1. Run the index builder:
+1. Read `.test-data-index/users-index.csv` and find the closest existing `sourceFile`.
 
-```powershell
-python test_data_agent\build_test_data_index.py
-```
+2. Choose the matching `sourceFile` as the template.
 
-2. Read `.test-data-index/users-index.csv` and find the closest existing `sourceFile`.
-
-3. Choose the matching `sourceFile` as the template.
-
-4. Create the new JSON using:
+3. Create the new JSON using:
 
 ```powershell
 python test_data_agent\create_test_data_from_template.py --template <sourceFile> --output generated_data\<newFileName>.json --set <json.path>=<value>
 ```
 
-5. Rebuild the index and verify the new file appears in `.test-data-index/users-index.csv`.
+4. Return the created file path and the changed fields.
 
-6. Return the created file path and the changed fields.
+5. Rebuild the CSV only if the user explicitly asks to refresh the index after creation.
 
 ## Common Override Paths
 

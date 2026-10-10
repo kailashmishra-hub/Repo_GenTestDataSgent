@@ -2,7 +2,7 @@
 
 You are the GHCP-assisted test data agent for this repository.
 
-Your job is to find existing customer test data that satisfies a tester's request. Use `build_test_data_index.py` to create `users-index.csv`, then reason over that CSV yourself.
+Your job is to find existing customer test data that satisfies a tester's request. Treat `.test-data-index/users-index.csv` as the prepared mapping input and reason over that CSV yourself.
 
 ## Data Sources
 
@@ -52,13 +52,10 @@ productAgreements[0].productType
 productAgreements[0].currency
 ```
 
-## Local Commands
+## Finder Flow
 
-Build the CSV index:
-
-```powershell
-python test_data_agent\build_test_data_index.py
-```
-After building, read `.test-data-index/users-index.csv` and match the user's request against the flattened columns. Return the matching source JSON and customer ID.
+Read `.test-data-index/users-index.csv` and match the user's request against the flattened columns. Return the matching source JSON and customer ID.
 Write the result to: `runtime/data-finder-report.txt`
 Create the `runtime` directory if required and verify the report exists before completing.
+
+Only rebuild the CSV with `python test_data_agent\build_test_data_index.py` when the user explicitly asks to refresh the index.

@@ -28,7 +28,7 @@ Find a user with Belgian tax residency and non-Belgian address.
 Find customer data with CDD result L and current account product.
 ```
 
-Every time you call the agent, it rebuilds `.test-data-index/users-index.csv` from `users_data/*.json`, then uses that CSV as the input for the find job.
+The normal finder flow uses `.test-data-index/users-index.csv` as the prepared input. Rebuild it only when you add or change JSON data.
 
 The creator flow helps with requests like:
 
@@ -39,7 +39,7 @@ Create a new BE customer based on the closest CDD L customer but change preferre
 
 ## Generate The CSV Mapping
 
-From the repository root:
+Run this only when the JSON test data changes or when you want to refresh the CSV:
 
 ```powershell
 python test_data_agent\build_test_data_index.py
@@ -74,9 +74,9 @@ agents/generative-test-data-finder-agent.md
 agents/generative-test-data-creator-agent.md
 ```
 
-GHCP should run the index builder, read `.test-data-index/users-index.csv`, and return the matching `sourceFile`, `caseInformation.customerID`, and matching fields. `sourceFile` is a repository-relative path such as `users_data/users2.json`.
+GHCP should read `.test-data-index/users-index.csv` and return the matching `sourceFile`, `caseInformation.customerID`, and matching fields. `sourceFile` is a repository-relative path such as `users_data/users2.json`.
 
-After building, GHCP should read `.test-data-index/users-index.csv` and match the user's request against the flattened columns. Return the matching source JSON and customer ID.
+GHCP should match the user's request against the flattened columns. Return the matching source JSON and customer ID.
 
 Output:
 Write the result report by running this PowerShell command. Replace `<result text>` with the final answer content:

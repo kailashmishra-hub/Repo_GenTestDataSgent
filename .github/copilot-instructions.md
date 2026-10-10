@@ -24,17 +24,13 @@ Generated index:
 
 Use this flow:
 
-1. Rebuild the searchable CSV from the latest JSON files:
-
-```powershell
-python test_data_agent\build_test_data_index.py
-```
+1. Treat `.test-data-index/users-index.csv` as already prepared input unless the user explicitly asks to rebuild it.
 
 2. Read `.test-data-index/users-index.csv`.
 
 3. Match the user's request against the flattened CSV columns.
 
-4. Return the best matching `sourceFile`, `caseInformation.customerID`, and the fields that matched. Write the output to: `runtime/data-finder-report.txt`
+4. Return the best matching `sourceFile`, `caseInformation.customerID`, and the fields that matched.
 
 5. Write the result report by running this PowerShell command. Replace `<result text>` with the final answer content:
 
@@ -83,6 +79,5 @@ Creation flow:
 python test_data_agent\create_test_data_from_template.py --template <sourceFile> --output generated_data\<newFile>.json --set <json.path>=<value>
 ```
 
-4. Rebuild `.test-data-index/users-index.csv`.
-5. Verify the generated file appears in the CSV with the requested values.
-6. Return the generated file path and changed fields.
+4. Return the generated file path and changed fields.
+5. Rebuild `.test-data-index/users-index.csv` only if the user asks to refresh the CSV after creation.

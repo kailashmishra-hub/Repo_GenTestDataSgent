@@ -19,6 +19,8 @@ and generates the main input CSV:
 
 ## Build the CSV Index
 
+Run this only when JSON test data changes or when you want to refresh the prepared CSV input:
+
 ```powershell
 python test_data_agent\build_test_data_index.py
 ```

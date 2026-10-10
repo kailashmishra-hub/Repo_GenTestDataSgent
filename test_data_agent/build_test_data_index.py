@@ -39,7 +39,7 @@ def load_users():
     for source_dir in SOURCE_DIRS:
         if not source_dir.exists():
             continue
-        for json_file in sorted(source_dir.glob("*.json")):
+        for json_file in sorted(source_dir.rglob("*.json")):
             with json_file.open(encoding="utf-8") as handle:
                 data = json.load(handle)
             if isinstance(data, list):

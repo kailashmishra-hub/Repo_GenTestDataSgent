@@ -53,22 +53,6 @@ The main generated input file is:
 
 `users-index.csv` contains flattened JSON paths such as `individual.postalAddresses[0].countryCode`, so nested JSON fields are also available for searching.
 
-## Write A Finder Report
-
-To write a result report to `runtime/data-finder--report.txt`:
-
-```powershell
-python test_data_agent\write_data_finder_report.py --text "Your result text here"
-```
-
-Or pipe content:
-
-```powershell
-"Your result text here" | python test_data_agent\write_data_finder_report.py
-```
-
-The script creates `runtime` if needed and verifies the report exists before completing.
-
 ## GHCP Usage
 
 In GitHub Copilot Chat, ask questions such as:
@@ -91,6 +75,21 @@ agents/generative-test-data-creator-agent.md
 ```
 
 GHCP should run the index builder, read `.test-data-index/users-index.csv`, and return the matching `sourceFile`, `caseInformation.customerID`, and matching fields. `sourceFile` is a repository-relative path such as `users_data/users2.json`.
+
+After building, GHCP should read `.test-data-index/users-index.csv` and match the user's request against the flattened columns. Return the matching source JSON and customer ID.
+
+Output:
+Write the result report by running this PowerShell command. Replace `<result text>` with the final answer content:
+
+```powershell
+$reportPath = "runtime/data-finder--report.txt"
+$reportContent = @'
+<result text>
+'@
+New-Item -ItemType Directory -Force -Path (Split-Path $reportPath) | Out-Null
+Set-Content -Path $reportPath -Value $reportContent -Encoding UTF8
+if (-not (Test-Path $reportPath)) { throw "Report was not created: $reportPath" }
+```
 
 For creating new test data, GHCP should use:
 

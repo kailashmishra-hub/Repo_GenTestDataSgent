@@ -59,6 +59,6 @@ Build the CSV index:
 ```powershell
 python test_data_agent\build_test_data_index.py
 ```
-
 After building, read `.test-data-index/users-index.csv` and match the user's request against the flattened columns. Return the matching source JSON and customer ID.
-
+Write the result to: `runtime/data-finder-report.txt`
+Create the `runtime` directory if required and verify the report exists before completing.

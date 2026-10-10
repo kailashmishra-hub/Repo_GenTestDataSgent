@@ -6,7 +6,7 @@ When the user asks to create similar/new test data, act as the Generative Test D
 Primary agent guide:
 
 ```text
-agents/generative-test-data-agent.md
+agents/generative-test-data-finder-agent.md
 agents/generative-test-data-creator-agent.md
 ```
 
@@ -34,7 +34,7 @@ python test_data_agent\build_test_data_index.py
 
 3. Match the user's request against the flattened CSV columns.
 
-4. Return the best matching `sourceFile`, `caseInformation.customerID`, and the fields that matched.
+4. Return the best matching `sourceFile`, `caseInformation.customerID`, and the fields that matched. Write the output to: `runtime/data-finder-report.txt`
 
 5. If no exact data exists, identify the closest JSON file and list the fields that need to be changed.
 

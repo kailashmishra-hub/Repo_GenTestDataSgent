@@ -14,7 +14,7 @@ users_data/
 The agent instructions live in:
 
 ```text
-agents/generative-test-data-agent.md
+agents/generative-test-data-finder-agent.md
 .github/copilot-instructions.md
 ```
 
@@ -70,7 +70,7 @@ GHCP should follow:
 and use:
 
 ```text
-agents/generative-test-data-agent.md
+agents/generative-test-data-finder-agent.md
 agents/generative-test-data-creator-agent.md
 ```
 

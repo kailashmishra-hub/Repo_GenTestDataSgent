@@ -5,8 +5,8 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIRS = [
-    PROJECT_ROOT / "users_data",
-    PROJECT_ROOT / "generated_data",
+    PROJECT_ROOT / "users_data"
+ #   PROJECT_ROOT / "generated_data",
 ]
 OUTPUT_DIR = PROJECT_ROOT / ".test-data-index"
 INDEX_CSV = OUTPUT_DIR / "users-index.csv"
